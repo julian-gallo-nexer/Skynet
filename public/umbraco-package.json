@@ -1,0 +1,29 @@
+{
+  "$schema": "../../umbraco14Test/umbraco-package-schema.json",
+  "name": "My Dashboard",
+  "version": "0.1.0",
+  "extensions": [
+    {
+      "type": "dashboard",
+      "alias": "My.Dashboard.MyExtension",
+      "name": "My Dashboard",
+      "element": "/App_Plugins/Client/my-element.js",
+      "elementName": "my-element",
+      "meta": {
+        "label": "My Dashboard",
+        "pathname": "my-dashboard"
+      }
+    },
+    {
+      "type": "dashboard",
+      "alias": "Chatbot.MyExtension",
+      "name": "IA Chatbot",
+      "element": "/App_Plugins/Client/ia-chatbot.js",
+      "elementName": "ia-chatbot",
+      "meta": {
+        "label": "IA Chatbot",
+        "pathname": "ia-chatbot"
+      }
+    }
+  ]
+}
