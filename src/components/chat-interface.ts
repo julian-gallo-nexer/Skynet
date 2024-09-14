@@ -199,13 +199,25 @@ class ChatInterface extends LitElement {
       font-family: sans-serif;
     }
 
+    .hero-button {
+      width:40%;
+      height:35%;
+      background: rgba(255, 255, 255, 0.31);
+      border-radius: 3px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(9.2px);
+      -webkit-backdrop-filter: blur(9.2px);
+    }
+
+    .hero-button :hover {
+      cursor:none;
+      transform: scale(1.1);
+    }
+    
     a {
       font-weight: 500;
       color: #646cff;
       text-decoration: inherit;
-    }
-    a:hover {
-      color: #535bf2;
     }
 
     .chat-container {
@@ -265,7 +277,6 @@ class ChatInterface extends LitElement {
     }
 
     button:hover {
-      background-color: #0056b3;
       transform: scale(1.1);
     }
   `;
