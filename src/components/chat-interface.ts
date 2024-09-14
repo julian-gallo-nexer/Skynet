@@ -72,7 +72,7 @@ class ChatInterface extends LitElement {
         headers: {
           "Content-Type": "text/plain",
         },
-        body: JSON.parse(JSON.stringify(messages)),
+        body: JSON.stringify(messages),
       });
 
       if (!response.ok) {
@@ -115,22 +115,21 @@ class ChatInterface extends LitElement {
     :host {
       display:flex;
       width:100%;
-      display: block;
       font-family: Arial, sans-serif;
     }
 
     .chat-container {
       justify-content:center;
       margin:10px;
+      margin-top:300px;
       width: 95%;
       max-width: 100%;
-      border: 1px solid #ccc;
-      border-radius: 8px;
       padding: 10px;
+      background-color:#383737;
     }
 
     .messages {
-      height: 200px;
+      height: 500px;
       overflow-y: auto;
       border-bottom: 1px solid #ccc;
       margin-bottom: 10px;
@@ -141,6 +140,7 @@ class ChatInterface extends LitElement {
     }
     .messageGpt {
       padding: 5px 0;
+      margin-right:20px;
       display: flex;
       justify-content: flex-end;
     }
