@@ -71,7 +71,7 @@ class ChatInterface extends LitElement {
       const response = await fetch("https://localhost:44352/Chatbot/Chat", {
         method: "POST",
         headers: {
-          "Content-Type": "text/plain",
+          "Content-Type": "application/json",
         },
         body:  JSON.stringify( theMesage ),
       });
