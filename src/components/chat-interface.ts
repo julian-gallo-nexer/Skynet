@@ -64,15 +64,16 @@ class ChatInterface extends LitElement {
     this.currentMessage = input.value;
   }
 
-  async fetchData(messages: Array <Object> ) {
+  async fetchData(historyMessages: Array <Object> ) {
     console.log("estoy dentro del fetch");
+    const theMesage = {messages : historyMessages};
     try {
       const response = await fetch("https://localhost:44352/Chatbot/Chat", {
         method: "POST",
         headers: {
           "Content-Type": "text/plain",
         },
-        body: JSON.stringify(messages),
+        body:  JSON.stringify( theMesage ),
       });
 
       if (!response.ok) {
@@ -113,6 +114,7 @@ class ChatInterface extends LitElement {
 
   static styles = css`
     :host {
+      color:rgba(255, 255, 255, 0.87);
       display:flex;
       width:100%;
       font-family: Arial, sans-serif;
@@ -161,7 +163,6 @@ class ChatInterface extends LitElement {
       flex: 1;
       padding: 5px;
       border-radius: 4px;
-      border: 1px solid #ccc;
     }
 
     button {
