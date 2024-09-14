@@ -27,7 +27,14 @@ class ChatInterface extends LitElement {
 
   render() {
     return html`
-    <hero-element></hero-element>
+    <div class="hero-container">
+        <div class= "hero-background continer">
+          <h2 class='hero-title'> scaynet</h2>
+          <h4 class='hero-sub_title'> Let Me Make Your Content </h4>
+          <p class='hero-paragraph'> The new tool for your CMS page, let me help you and everything will be fine</p>
+          <a><button class="hero-button">try it</button></a>
+        </div>
+      </div>
       <div class="chat-container">
         <div class="messages">
           ${this.messages.map((message) => {
@@ -126,12 +133,42 @@ class ChatInterface extends LitElement {
       display:flex;
       width:100%;
       font-family: Arial, sans-serif;
+      justify-content: center;
+    }
+
+    .hero-container{
+      width:100%;
+      background: rgb(1,0,36);
+      background: linear-gradient(90deg, rgba(1,0,36,1) 3%, rgba(9,109,121,1) 24%, rgba(65,9,121,1) 72%);
+      position:absolute;
+      display:flex;
+      top:0px;
+      justify-content: center;
+      text-align: center;
+      padding:2rem;
+    }
+
+    .hero-title{
+      text-transform:uppercase;
+      color:white;
+      font-size:2rem;
+      margin:10px;
+      font-family:sans-serif;
+    }
+
+    a {
+      font-weight: 500;
+      color: #646cff;
+      text-decoration: inherit;
+    }
+    a:hover {
+      color: #535bf2;
     }
 
     .chat-container {
       justify-content:center;
       margin:10px;
-      margin-top:300px;
+      margin-top:200px;
       width: 95%;
       max-width: 100%;
       padding: 10px;
