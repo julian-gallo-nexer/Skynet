@@ -86,7 +86,7 @@ class ChatInterface extends LitElement {
     const theMesage = { messages: historyMessages };
     try {
       const response = await fetch(
-        "https://localhost:44352/umbraco/management/api/v1/chatbot",
+        "https://localhost:44352/Chatbot/Chat",
         {
           method: "POST",
           headers: {
@@ -141,8 +141,6 @@ class ChatInterface extends LitElement {
 
   static styles = css`
     :host {
-      position: fixed;
-      top: 0;
       height: 100%;
       color: black;
       display: flex;
@@ -246,7 +244,7 @@ class ChatInterface extends LitElement {
 
     .messages {
       min-height: 100px;
-      height: 80%;
+      height: auto;
       max-height: 500px;
       overflow-y: auto;
       border-bottom: 1px solid #ccc;
