@@ -79,13 +79,17 @@ class ChatInterface extends LitElement {
     console.log("estoy dentro del fetch");
     const theMesage = { messages: historyMessages };
     try {
-      const response = await fetch("https://localhost:44352/Chatbot/Chat", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(theMesage),
-      });
+      const response = await fetch(
+        "https://localhost:44352/umbraco/management/api/v1/chatbot",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer kIzNHctDI-RawTkWQ8t7JmEk0ogN4XTmrRu0MFcvx1E",
+          },
+          body: JSON.stringify(theMesage),
+        }
+      );
 
       if (!response) {
         throw new Error("Error to send the message");
@@ -200,8 +204,8 @@ class ChatInterface extends LitElement {
     }
 
     .hero-button {
-      width:40%;
-      height:35%;
+      width: 40%;
+      height: 35%;
       background: rgba(255, 255, 255, 0.31);
       border-radius: 3px;
       box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -210,10 +214,10 @@ class ChatInterface extends LitElement {
     }
 
     .hero-button :hover {
-      cursor:none;
+      cursor: none;
       transform: scale(1.1);
     }
-    
+
     a {
       font-weight: 500;
       color: #646cff;
