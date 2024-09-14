@@ -27,6 +27,7 @@ class ChatInterface extends LitElement {
 
   render() {
     return html`
+    <hero-element></hero-element>
       <div class="chat-container">
         <div class="messages">
           ${this.messages.map((message) => {
@@ -180,12 +181,12 @@ class ChatInterface extends LitElement {
       background-color: #68acf5;
       color: black;
       cursor: pointer;
+      transition: transform 0.3s ease, background-color 0.3s ease;
     }
 
     button:hover {
       background-color: #0056b3;
-      padding: 6px 11px;
-      font-size: 15px;
+      transform: scale(1.1)
     }
   `;
 }
