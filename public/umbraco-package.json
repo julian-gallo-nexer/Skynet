@@ -19,7 +19,7 @@
       "alias": "Chatbot.MyExtension",
       "name": "IA Chatbot",
       "element": "/App_Plugins/Client/ia-chatbot.js",
-      "elementName": "ia-chatbot",
+      "elementName": "chat-inteface",
       "meta": {
         "label": "IA Chatbot",
         "pathname": "ia-chatbot"
