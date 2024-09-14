@@ -1,30 +1,58 @@
-import { LitElement, html, css } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { LitElement, html, css } from "lit";
+import { customElement, property } from "lit/decorators.js";
 
-@customElement('chat-interface')
+@customElement("chat-interface")
 class ChatInterface extends LitElement {
   @property({ type: Array })
-  messages: Array<{ user: string, text: string }> = [];
+  messages: Array<{ role: string; content: string; timestap: string }> = [];
 
   @property({ type: String })
-  currentMessage: string = '';
+  currentMessage: string = "";
 
   @property({ type: String })
-  username: string = 'User';
+  username: string = "user";
+
+  @property({ type: String })
+  Gpt: string = "bot";
+
+  @property({ type: String })
+  GptMessage: string = "";
+
+  constructor() {
+    super();
+    const savedMessages = localStorage.getItem("chat");
+    console.log(savedMessages);
+    this.messages = savedMessages ? JSON.parse(savedMessages) : [];
+  }
 
   render() {
     return html`
       <div class="chat-container">
         <div class="messages">
-          ${this.messages.map(message => html`
-            <div class="message">
-              <span class="user">${message.user}:</span> ${message.text}
-            </div>
-          `)}
+          ${this.messages.map((message) => {
+            if (message.role === "user") {
+              return html`
+                <div class="message">
+                  <span class="user">${message.role}:</span> ${message.content}
+                </div>
+              `;
+            } else if (message.role === "bot") {
+              return html`
+                <div class="messageGpt">
+                  ${message.content}<span class="Gpt"> :${message.role}</span>
+                </div>
+              `;
+            }
+          })}
         </div>
 
         <div class="input-container">
-          <input type="text" .value=${this.currentMessage} @input=${this._onInput} placeholder="Type a message..." />
+          <input
+            type="text"
+            .value=${this.currentMessage}
+            @input=${this._onInput}
+            placeholder="Type a message..."
+          />
           <button @click=${this._sendMessage}>Send</button>
         </div>
       </div>
@@ -36,11 +64,51 @@ class ChatInterface extends LitElement {
     this.currentMessage = input.value;
   }
 
-  private _sendMessage() {
-    if (this.currentMessage.trim()) {
-      this.messages = [...this.messages, { user: this.username, text: this.currentMessage }];
-      this.currentMessage = '';
+  async fetchData(messages: string) {
+    console.log("estoy dentro del fetch");
+    try {
+      const response = await fetch("https://localhost:44352/Chatbot/Chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "text/plain",
+        },
+        body: JSON.stringify(messages),
+      });
+
+      if (!response.ok) {
+        throw new Error("Error to send the message");
+      }
+      const jsonData = await response.json();
+
+      this.messages = [...this.messages, JSON.parse(jsonData)];
+      localStorage.clear();
+      localStorage.setItem("chat", JSON.stringify(this.messages));
+      
+    } catch (error: any) {
+      this.messages = [
+        ...this.messages,
+        {
+          role: this.Gpt,
+          content: error.message,
+          timestap: new Date().toISOString().slice(0, 19),
+        },
+      ];
     }
+  }
+
+  private _sendMessage() {
+    this.messages = [
+      ...this.messages,
+      {
+        role: this.username,
+        content: this.currentMessage,
+        timestap: new Date().toISOString().slice(0, 19),
+      },
+    ];
+    this.fetchData(this.currentMessage);
+    localStorage.clear();
+    localStorage.setItem("chat", JSON.stringify(this.messages));
+    this.currentMessage = "";
   }
 
   static styles = css`
@@ -66,6 +134,15 @@ class ChatInterface extends LitElement {
 
     .message {
       padding: 5px 0;
+    }
+    .messageGpt {
+      padding: 5px 0;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .messageGpt .Gpt {
+      font-weight: bold;
     }
 
     .message .user {
@@ -100,6 +177,6 @@ class ChatInterface extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'chat-interface': ChatInterface;
+    "chat-interface": ChatInterface;
   }
 }
