@@ -298,11 +298,14 @@ class ChatInterface extends LitElement {
     .Gpt {
       font-weight: bold;
       align-self: center;
+      margin-inline: 10px
+      
     }
     
     .user {
       font-weight: bold;
       text-align:end;
+      margin-inline: 10px
     }
 
     .input-container {
