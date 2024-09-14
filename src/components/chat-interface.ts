@@ -82,7 +82,7 @@ class ChatInterface extends LitElement {
     const theMesage = { messages: historyMessages };
     try {
       const response = await fetch(
-        "https://localhost:44352/umbraco/management/api/v1/chatbot",
+        "https://localhost:44352/Chatbot/Chat",
         {
           method: "POST",
           headers: {
@@ -137,8 +137,6 @@ class ChatInterface extends LitElement {
 
   static styles = css`
     :host {
-      position: fixed;
-      top: 0;
       height: 100%;
       color: black;
       display: flex;
@@ -205,7 +203,7 @@ class ChatInterface extends LitElement {
       box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
       backdrop-filter: blur(9.2px);
       -webkit-backdrop-filter: blur(9.2px);
-      border:0;
+      border: 0;
     }
 
     .hero-button :hover {
@@ -242,7 +240,7 @@ class ChatInterface extends LitElement {
 
     .messages {
       min-height: 100px;
-      height: 80%;
+      height: auto;
       max-height: 500px;
       overflow-y: auto;
       border-bottom: 1px solid #ccc;
@@ -312,12 +310,12 @@ class ChatInterface extends LitElement {
       text-decoration: none;
       font-weight: bold;
       transition: transform 0.3s ease, background-color 0.3s ease;
-      border:0
+      border: 0;
     }
 
     button:hover {
       transform: scale(1.1);
-      cursor:pointer;
+      cursor: pointer;
     }
   `;
 }
