@@ -72,7 +72,7 @@ class ChatInterface extends LitElement {
         headers: {
           "Content-Type": "text/plain",
         },
-        body: JSON.stringify(messages),
+        body: JSON.parse(JSON.stringify(messages)),
       });
 
       if (!response.ok) {
@@ -113,12 +113,13 @@ class ChatInterface extends LitElement {
 
   static styles = css`
     :host {
+      width:100%;
       display: block;
       font-family: Arial, sans-serif;
     }
 
     .chat-container {
-      width: 300px;
+      width: 95%;
       max-width: 100%;
       border: 1px solid #ccc;
       border-radius: 8px;
