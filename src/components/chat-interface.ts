@@ -79,7 +79,7 @@ class ChatInterface extends LitElement {
       if (!response) {
         throw new Error("Error to send the message");
       }
-      const jsonData : string  = JSON.stringify(response);
+      const jsonData : any = await response.json();
 
       this.messages = [
         ...this.messages,
