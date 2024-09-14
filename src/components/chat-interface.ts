@@ -81,13 +81,17 @@ class ChatInterface extends LitElement {
   async fetchData(historyMessages: Array<Object>) {
     const theMesage = { messages: historyMessages };
     try {
-      const response = await fetch("https://localhost:44352/Chatbot/Chat", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(theMesage),
-      });
+      const response = await fetch(
+        "https://localhost:44352/umbraco/management/api/v1/chatbot",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer kIzNHctDI-RawTkWQ8t7JmEk0ogN4XTmrRu0MFcvx1E",
+          },
+          body: JSON.stringify(theMesage),
+        }
+      );
 
       if (!response) {
         throw new Error("Error to send the message");
