@@ -3,7 +3,7 @@ import { defineConfig } from "vite";
 export default defineConfig({
   build: {
     lib: {
-      entry: ["src/my-element.ts"], // your web component source file
+      entry: ["src/my-element.ts", "src/components/chat-interface.ts"], // your web component source file
       formats: ["es"],
     },
     outDir: "../umbraco14Test/App_Plugins/Client", // all compiled files will be placed here

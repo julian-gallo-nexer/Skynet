@@ -1,7 +1,5 @@
 import { LitElement, css, html } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import litLogo from "./assets/lit.svg";
-import viteLogo from "/vite.svg";
 
 /**
  * An example element.
@@ -9,8 +7,8 @@ import viteLogo from "/vite.svg";
  * @slot - This element has a slot
  * @csspart button - The button
  */
-@customElement("my-element")
-export class MyElement extends LitElement {
+@customElement("hero-element")
+export class HeroElement extends LitElement {
   /**
    * Copy for the read the docs hint.
    */
@@ -25,60 +23,41 @@ export class MyElement extends LitElement {
 
   render() {
     return html`
-      <div>
-        <h1>Ejemplo de web component</h1>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src=${viteLogo} class="logo" alt="Vite logo" />
-        </a>
-        <a href="https://lit.dev" target="_blank">
-          <img src=${litLogo} class="logo lit" alt="Lit logo" />
-        </a>
+      <div class="hero-container">
+        <div class= "hero-background continer">
+          <h2 class='hero-title'> scaynet</h2>
+          <h4 class='hero-sub_title'> Let Me Make Your Content </h4>
+          <p class='hero-paragraph'> The new tool for your CMS page, let me help you and everything will be fine</p>
+          <a><button class="hero-button">try it</button></a>
+        </div>
       </div>
-      <slot></slot>
-      <div class="card">
-        <button @click=${this._onClick} part="button">Welcome to Lit</button>
-        <p>${this.count}</p>
-      </div>
-      <p class="read-the-docs">${this.docsHint}</p>
     `;
   }
 
-  private _onClick() {
-    this.count++;
-  }
+  // private _onClick() {
+  //   this.count++;
+  // }
 
   static styles = css`
-    :host {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 2rem;
+
+    .hero-container{
+      width:100%;
+      background: rgb(1,0,36);
+      background: linear-gradient(90deg, rgba(1,0,36,1) 3%, rgba(9,109,121,1) 24%, rgba(65,9,121,1) 72%);
+      position:absolute;
+      display:flex;
+      top:0px;
+      justify-content: center;
       text-align: center;
+      padding:2rem;
     }
 
-    .logo {
-      height: 6em;
-      padding: 1.5em;
-      will-change: filter;
-      transition: filter 300ms;
-    }
-    .logo:hover {
-      filter: drop-shadow(0 0 2em #646cffaa);
-    }
-    .logo.lit:hover {
-      filter: drop-shadow(0 0 2em #325cffaa);
-    }
-
-    .card {
-      padding: 2em;
-    }
-
-    .read-the-docs {
-      color: #888;
-    }
-
-    ::slotted(h1) {
-      font-size: 3.2em;
-      line-height: 1.1;
+    .hero-title{
+      text-transform:uppercase;
+      color:white;
+      font-size:2rem;
+      margin:10px;
+      font-family:sans-serif;
     }
 
     a {
@@ -122,6 +101,6 @@ export class MyElement extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "my-element": MyElement;
+    "hero-element": HeroElement;
   }
 }

@@ -18,11 +18,11 @@
       "type": "dashboard",
       "alias": "Chatbot.MyExtension",
       "name": "IA Chatbot",
-      "element": "/App_Plugins/Client/ia-chatbot.js",
-      "elementName": "ia-chatbot",
+      "element": "/App_Plugins/Client/chat-interface.js",
+      "elementName": "chat-interface",
       "meta": {
         "label": "IA Chatbot",
-        "pathname": "ia-chatbot"
+        "pathname": "chat-interface"
       }
     }
   ]
