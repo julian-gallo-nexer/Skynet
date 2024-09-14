@@ -245,7 +245,7 @@ class ChatInterface extends LitElement {
     .messages {
       min-height: 100px;
       height: auto;
-      max-height: 500px;
+      max-height: 80%;
       overflow-y: auto;
       border-bottom: 1px solid #ccc;
       margin-bottom: 10px;
