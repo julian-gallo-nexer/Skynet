@@ -27,11 +27,14 @@ class ChatInterface extends LitElement {
 
   render() {
     return html`
-    <div class="hero-container">
-        <div class= "hero-background continer">
-          <h2 class='hero-title'> scaynet</h2>
-          <h4 class='hero-sub_title'> Let Me Make Your Content </h4>
-          <p class='hero-paragraph'> The new tool for your CMS page, let me help you and everything will be fine</p>
+      <div class="hero-container">
+        <div class="hero-background continer">
+          <h2 class="hero-title">scaynet</h2>
+          <h4 class="hero-sub_title">Let Me Make Your Content</h4>
+          <p class="hero-paragraph">
+            The new tool for your CMS page, let me help you and everything will
+            be fine.
+          </p>
           <a><button class="hero-button">try it</button></a>
         </div>
       </div>
@@ -72,22 +75,22 @@ class ChatInterface extends LitElement {
     this.currentMessage = input.value;
   }
 
-  async fetchData(historyMessages: Array <Object> ) {
+  async fetchData(historyMessages: Array<Object>) {
     console.log("estoy dentro del fetch");
-    const theMesage = {messages : historyMessages};
+    const theMesage = { messages: historyMessages };
     try {
       const response = await fetch("https://localhost:44352/Chatbot/Chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body:  JSON.stringify( theMesage ),
+        body: JSON.stringify(theMesage),
       });
 
       if (!response) {
         throw new Error("Error to send the message");
       }
-      const jsonData : any = await response.text();
+      const jsonData: any = await response.text();
 
       this.messages = [
         ...this.messages,
@@ -99,7 +102,6 @@ class ChatInterface extends LitElement {
       ];
       localStorage.clear();
       localStorage.setItem("chat", JSON.stringify(this.messages));
-      
     } catch (error: any) {
       this.messages = [
         ...this.messages,
@@ -129,31 +131,72 @@ class ChatInterface extends LitElement {
 
   static styles = css`
     :host {
-      color:rgba(255, 255, 255, 0.87);
-      display:flex;
-      width:100%;
+      color: rgba(255, 255, 255, 0.87);
+      display: flex;
+      width: 100%;
       font-family: Arial, sans-serif;
       justify-content: center;
     }
 
-    .hero-container{
-      width:100%;
-      background: rgb(1,0,36);
-      background: linear-gradient(90deg, rgba(1,0,36,1) 3%, rgba(9,109,121,1) 24%, rgba(65,9,121,1) 72%);
-      position:absolute;
-      display:flex;
-      top:0px;
+    .hero-container {
+      width: 100%;
+      position: absolute;
+      display: flex;
+      top: 0px;
       justify-content: center;
       text-align: center;
-      padding:2rem;
+      padding: 2rem;
+      background-size: 400% 400%;
+      animation: gradientShift 8s ease infinite;
     }
 
-    .hero-title{
-      text-transform:uppercase;
-      color:white;
-      font-size:2rem;
-      margin:10px;
-      font-family:sans-serif;
+    .hero-container {
+      width: 100%;
+      position: absolute;
+      display: flex;
+      top: 0px;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      background: linear-gradient(
+        45deg,
+        #ff552a,
+        #eeba92,
+        #ff7eb9,
+        #f7e096,
+        #a8edea,
+        #2575fc,
+        #6a11cb,
+        #b92b27
+      );
+      background-size: 200% 200%;
+      animation: gradientAnimation 8s ease-in-out infinite;
+    }
+
+    @keyframes gradientAnimation {
+      0% {
+        background-position: 0% 50%;
+      }
+      25% {
+        background-position: 50% 100%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      75% {
+        background-position: 50% 0%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    .hero-title {
+      text-transform: uppercase;
+      color: white;
+      font-size: 2rem;
+      margin: 10px;
+      font-family: sans-serif;
     }
 
     a {
@@ -166,13 +209,13 @@ class ChatInterface extends LitElement {
     }
 
     .chat-container {
-      justify-content:center;
-      margin:10px;
-      margin-top:200px;
+      justify-content: center;
+      margin: 10px;
+      margin-top: 200px;
       width: 95%;
       max-width: 100%;
       padding: 10px;
-      background-color:#383737;
+      background-color: #383737;
     }
 
     .messages {
@@ -187,7 +230,7 @@ class ChatInterface extends LitElement {
     }
     .messageGpt {
       padding: 5px 0;
-      margin-right:20px;
+      margin-right: 20px;
       display: flex;
       justify-content: flex-end;
     }
@@ -205,11 +248,11 @@ class ChatInterface extends LitElement {
     }
 
     input[type="text"] {
-      border:none;
+      border: none;
       flex: 1;
       padding: 5px;
-      background-color:#cacaca;
-      color:#292929;
+      background-color: #cacaca;
+      color: #292929;
     }
 
     button {
@@ -223,7 +266,7 @@ class ChatInterface extends LitElement {
 
     button:hover {
       background-color: #0056b3;
-      transform: scale(1.1)
+      transform: scale(1.1);
     }
   `;
 }
