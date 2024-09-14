@@ -44,16 +44,20 @@ class ChatInterface extends LitElement {
           ${this.messages.map((message) => {
             if (message.role === "user") {
               return html`
-                <div class="message">
-                  <p>${message.content}</p>
-                  <span class="user"> :${message.role}</span>
+                <div class="message-content">
+                  <span class="user">${message.role}</span>
+                  <div class="message">
+                    <p>${message.content}</p>
+                  </div>
                 </div>
               `;
             } else if (message.role === "bot") {
               return html`
-                <div class="messageGpt">
-                  <span class="Gpt"> ${message.role} : </span>
-                  <p>${message.content}</p>
+                <div class="messageGpt-content">
+                  <span class="Gpt"> ${message.role}</span>
+                  <div class="messageGpt">
+                    <p>${message.content}</p>
+                  </div>
                 </div>
               `;
             }
@@ -205,7 +209,7 @@ class ChatInterface extends LitElement {
       box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
       backdrop-filter: blur(9.2px);
       -webkit-backdrop-filter: blur(9.2px);
-      border:0;
+      border: 0;
     }
 
     .hero-button :hover {
@@ -250,6 +254,16 @@ class ChatInterface extends LitElement {
       /* padding-inline: 10px; */
     }
 
+    .message-content{
+      margin-bottom: 1rem;
+      padding: 0.5rem 1rem;
+      border-radius: 1rem;
+      width: max-content;
+      max-width: 80%;
+      display: flex;
+      flex-direction: column;
+      margin-left: auto;
+    }
     .message {
       margin-bottom: 1rem;
       padding: 0.5rem 1rem;
@@ -266,6 +280,9 @@ class ChatInterface extends LitElement {
       }
     }
 
+    .messageGpt-content{
+      align-self: flex-start;
+    }
     .messageGpt {
       background-color: #f3f4f6;
       align-self: flex-start;
@@ -280,15 +297,14 @@ class ChatInterface extends LitElement {
         margin: 0;
       }
     }
-
-    .messageGpt .Gpt {
+    .Gpt {
       font-weight: bold;
       align-self: center;
     }
-
-    .message .user {
+    
+    .user {
       font-weight: bold;
-      align-self: center;
+      text-align:end;
     }
 
     .input-container {
@@ -312,12 +328,12 @@ class ChatInterface extends LitElement {
       text-decoration: none;
       font-weight: bold;
       transition: transform 0.3s ease, background-color 0.3s ease;
-      border:0
+      border: 0;
     }
 
     button:hover {
       transform: scale(1.1);
-      cursor:pointer;
+      cursor: pointer;
     }
   `;
 }
