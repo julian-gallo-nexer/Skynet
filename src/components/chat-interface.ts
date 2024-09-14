@@ -64,7 +64,7 @@ class ChatInterface extends LitElement {
     this.currentMessage = input.value;
   }
 
-  async fetchData(messages: string) {
+  async fetchData(messages: Array <Object> ) {
     console.log("estoy dentro del fetch");
     try {
       const response = await fetch("https://localhost:44352/Chatbot/Chat", {
@@ -105,7 +105,7 @@ class ChatInterface extends LitElement {
         timestap: new Date().toISOString().slice(0, 19),
       },
     ];
-    this.fetchData(this.currentMessage);
+    this.fetchData(this.messages);
     localStorage.clear();
     localStorage.setItem("chat", JSON.stringify(this.messages));
     this.currentMessage = "";
@@ -113,12 +113,15 @@ class ChatInterface extends LitElement {
 
   static styles = css`
     :host {
+      display:flex;
       width:100%;
       display: block;
       font-family: Arial, sans-serif;
     }
 
     .chat-container {
+      justify-content:center;
+      margin:10px;
       width: 95%;
       max-width: 100%;
       border: 1px solid #ccc;
