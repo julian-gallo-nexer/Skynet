@@ -39,18 +39,21 @@ class ChatInterface extends LitElement {
         </div>
       </div>
       <div class="chat-container">
+        <div class="chat-header">Live chat</div>
         <div class="messages">
           ${this.messages.map((message) => {
             if (message.role === "user") {
               return html`
                 <div class="message">
-                  <span class="user">${message.role}:</span> ${message.content}
+                  <p>${message.content}</p>
+                  <span class="user"> :${message.role}</span>
                 </div>
               `;
             } else if (message.role === "bot") {
               return html`
                 <div class="messageGpt">
-                  ${message.content}<span class="Gpt"> :${message.role}</span>
+                  <span class="Gpt"> ${message.role} : </span>
+                  <p>${message.content}</p>
                 </div>
               `;
             }
@@ -76,7 +79,6 @@ class ChatInterface extends LitElement {
   }
 
   async fetchData(historyMessages: Array<Object>) {
-    console.log("estoy dentro del fetch");
     const theMesage = { messages: historyMessages };
     try {
       const response = await fetch("https://localhost:44352/Chatbot/Chat", {
@@ -131,33 +133,26 @@ class ChatInterface extends LitElement {
 
   static styles = css`
     :host {
-      color: rgba(255, 255, 255, 0.87);
+      position: fixed;
+      top: 0;
+      height: 100%;
+      color: black;
       display: flex;
       width: 100%;
       font-family: Arial, sans-serif;
-      justify-content: center;
+      justify-content: flex-start;
+      flex-direction: column;
+      align-items: center;
     }
 
     .hero-container {
       width: 100%;
-      position: absolute;
       display: flex;
       top: 0px;
       justify-content: center;
       text-align: center;
       padding: 2rem;
-      background-size: 400% 400%;
-      animation: gradientShift 8s ease infinite;
-    }
-
-    .hero-container {
-      width: 100%;
-      position: absolute;
-      display: flex;
-      top: 0px;
-      justify-content: center;
-      text-align: center;
-      padding: 2rem;
+      color: #1f1f1f;
       background: linear-gradient(
         45deg,
         #ff552a,
@@ -193,66 +188,103 @@ class ChatInterface extends LitElement {
 
     .hero-title {
       text-transform: uppercase;
-      color: white;
       font-size: 2rem;
       margin: 10px;
       font-family: sans-serif;
     }
 
     .hero-button {
-      width:40%;
-      height:35%;
+      width: 40%;
+      height: 35%;
       background: rgba(255, 255, 255, 0.31);
       border-radius: 3px;
       box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
       backdrop-filter: blur(9.2px);
       -webkit-backdrop-filter: blur(9.2px);
+      border:0;
     }
 
     .hero-button :hover {
-      cursor:none;
+      cursor: none;
       transform: scale(1.1);
     }
-    
+
     a {
       font-weight: 500;
-      color: #646cff;
       text-decoration: inherit;
     }
 
     .chat-container {
       justify-content: center;
       margin: 10px;
-      margin-top: 200px;
-      width: 95%;
+      margin-top: 1rem;
       max-width: 100%;
       padding: 10px;
-      background-color: #383737;
+      width: 90%;
+      margin: 1rem auto;
+      background-color: white;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
     }
 
-    .messages {
-      height: 500px;
-      overflow-y: auto;
-      border-bottom: 1px solid #ccc;
+    .chat-header {
+      background-color: #f3f4f6;
+      padding: 1rem;
+      font-weight: bold;
+      color: black;
       margin-bottom: 10px;
     }
 
-    .message {
-      padding: 5px 0;
+    .messages {
+      min-height: 100px;
+      height: 80%;
+      max-height: 500px;
+      overflow-y: auto;
+      border-bottom: 1px solid #ccc;
+      margin-bottom: 10px;
+      /* padding-inline: 10px; */
     }
-    .messageGpt {
-      padding: 5px 0;
-      margin-right: 20px;
+
+    .message {
+      margin-bottom: 1rem;
+      padding: 0.5rem 1rem;
+      border-radius: 1rem;
+      width: max-content;
+      max-width: 80%;
+      background-color: #3b82f6;
+      color: white;
       display: flex;
-      justify-content: flex-end;
+      margin-left: auto;
+
+      p {
+        margin: 0;
+      }
+    }
+
+    .messageGpt {
+      background-color: #f3f4f6;
+      align-self: flex-start;
+      margin-bottom: 1rem;
+      padding: 0.5rem 1rem;
+      border-radius: 1rem;
+      max-width: 80%;
+      width: max-content;
+      display: flex;
+
+      p {
+        margin: 0;
+      }
     }
 
     .messageGpt .Gpt {
       font-weight: bold;
+      align-self: center;
     }
 
     .message .user {
       font-weight: bold;
+      align-self: center;
     }
 
     .input-container {
@@ -260,24 +292,28 @@ class ChatInterface extends LitElement {
     }
 
     input[type="text"] {
-      border: none;
-      flex: 1;
-      padding: 5px;
-      background-color: #cacaca;
-      color: #292929;
+      flex-grow: 1;
+      padding: 0.5rem;
+      border: 1px solid #d1d5db;
+      border-radius: 0.375rem;
+      margin-right: 0.5rem;
     }
 
     button {
-      padding: 5px 10px;
-      border: none;
-      background-color: #68acf5;
-      color: black;
-      cursor: pointer;
+      display: inline-block;
+      background-color: #3b82f6;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.375rem;
+      text-decoration: none;
+      font-weight: bold;
       transition: transform 0.3s ease, background-color 0.3s ease;
+      border:0
     }
 
     button:hover {
       transform: scale(1.1);
+      cursor:pointer;
     }
   `;
 }
