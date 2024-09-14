@@ -76,12 +76,19 @@ class ChatInterface extends LitElement {
         body:  JSON.stringify( theMesage ),
       });
 
-      if (!response.ok) {
+      if (!response) {
         throw new Error("Error to send the message");
       }
-      const jsonData = await response.json();
+      const jsonData : string  = JSON.stringify(response);
 
-      this.messages = [...this.messages, JSON.parse(jsonData)];
+      this.messages = [
+        ...this.messages,
+        {
+          role: this.Gpt,
+          content: jsonData,
+          timestap: new Date().toISOString().slice(0, 19),
+        },
+      ];
       localStorage.clear();
       localStorage.setItem("chat", JSON.stringify(this.messages));
       
@@ -160,22 +167,25 @@ class ChatInterface extends LitElement {
     }
 
     input[type="text"] {
+      border:none;
       flex: 1;
       padding: 5px;
-      border-radius: 4px;
+      background-color:#cacaca;
+      color:#292929;
     }
 
     button {
       padding: 5px 10px;
       border: none;
-      border-radius: 4px;
-      background-color: #007bff;
-      color: white;
+      background-color: #68acf5;
+      color: black;
       cursor: pointer;
     }
 
     button:hover {
       background-color: #0056b3;
+      padding: 6px 11px;
+      font-size: 15px;
     }
   `;
 }
